@@ -1,0 +1,329 @@
+/* =====================================================================
+   电商图片提取下载插件 - 图片展示页样式 (gallery.css)
+   简洁现代风格：圆角、留白、柔和阴影，响应式适配电脑 / 平板。
+   ===================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 让 HTML hidden 属性真正生效：避免被下方 .preview / .progress 的
+   display:flex 声明覆盖，导致弹窗和进度条常驻显示、遮罩阻挡点击 */
+[hidden] {
+  display: none !important;
+}
+
+:root {
+  --primary: #ff3d81;
+  --primary-grad: linear-gradient(135deg, #ff6a00, #ff3d81);
+  --bg: #f5f6fa;
+  --card-bg: #ffffff;
+  --text: #2b2f36;
+  --text-sub: #8a8f99;
+  --border: #e7e9ee;
+  --shadow: 0 4px 16px rgba(20, 24, 40, 0.08);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ---------------- 顶部工具栏 ---------------- */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+}
+
+.toolbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.count {
+  font-size: 14px;
+  color: var(--text-sub);
+  margin-right: 4px;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+  font-family: inherit;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn.ghost {
+  background: #ffffff;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn.ghost:hover {
+  border-color: #cfd3dc;
+  transform: translateY(-1px);
+}
+
+.btn.primary {
+  background: var(--primary-grad);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 61, 129, 0.35);
+}
+
+.btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(255, 61, 129, 0.45);
+}
+
+/* ---------------- 下载进度条 ---------------- */
+.progress {
+  max-width: 1280px;
+  margin: 14px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 8px;
+  background: #e7e9ee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--primary-grad);
+  border-radius: 4px;
+  transition: width 0.2s ease;
+}
+
+.progress-text {
+  font-size: 13px;
+  color: var(--text-sub);
+  white-space: nowrap;
+}
+
+/* ---------------- 图片网格 ---------------- */
+.grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(20, 24, 40, 0.14);
+}
+
+.card-check {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.card-check input {
+  position: absolute;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkmark {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #d5d9e0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.12s ease;
+}
+
+.card-check input:checked + .checkmark {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.card-check input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f0f1f5;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.card-img:hover img {
+  transform: scale(1.04);
+}
+
+.card-info {
+  padding: 10px 12px 12px;
+}
+
+.card-size {
+  font-size: 12px;
+  color: var(--text-sub);
+  margin-bottom: 4px;
+}
+
+.card-url {
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------------- 空状态 ---------------- */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-sub);
+  font-size: 15px;
+}
+
+/* ---------------- 预览弹窗 ---------------- */
+.preview {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.preview-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.preview-box {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.preview-box img {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  border-radius: 6px;
+}
+
+.preview-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #333;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.preview-url {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+  word-break: break-all;
+  max-width: 70vw;
+}
+
+/* ---------------- 响应式（平板 / 小屏） ---------------- */
+@media (max-width: 640px) {
+  .toolbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    padding: 16px;
+    gap: 12px;
+  }
+}

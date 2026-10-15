@@ -1,0 +1,21 @@
+# 系统与编辑器缓存
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Cursor / IDE 本地配置
+.cursor/
+.vscode/
+.idea/
+
+# 日志与临时缓存
+*.log
+*.tmp
+.cache/
+node_modules/
+
+# 密钥与本地配置（防止泄露）
+.env
+.env.*
+*.pem
+*.key

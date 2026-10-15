@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片提取结果</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+  <header class="toolbar">
+    <div class="toolbar-inner">
+      <h1 class="title">🖼️ 图片提取结果</h1>
+      <div class="actions">
+        <span class="count" id="count">已选 0 张</span>
+        <button id="selectAll" class="btn ghost">全选</button>
+        <button id="invert" class="btn ghost">反选</button>
+        <button id="download" class="btn primary">下载选中</button>
+      </div>
+    </div>
+    <div class="progress" id="progress" hidden>
+      <div class="progress-track">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <span class="progress-text" id="progressText"></span>
+    </div>
+  </header>
+
+  <main id="grid" class="grid"></main>
+
+  <!-- 图片放大预览弹窗 -->
+  <div id="preview" class="preview" hidden>
+    <div class="preview-mask" id="previewMask"></div>
+    <div class="preview-box">
+      <img id="previewImg" alt="图片预览">
+      <button class="preview-close" id="previewClose" title="关闭">×</button>
+      <div class="preview-url" id="previewUrl"></div>
+    </div>
+  </div>
+
+  <script src="gallery.js"></script>
+</body>
+</html>
